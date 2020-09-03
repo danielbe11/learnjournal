@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Link</th>
+        <th>Language</th>
+        <th>Framework</th>
+    </tr>
+    {% for item in list_resources %}
+    <tr>
+        <td>{{ item.name_text }}</td>
+        <td>{{ item.link }}</td>
+        <td>{{ item.language }}</td>
+        <td>{{ item.framework }}</td>
+    </tr>
+    {% endfor %}
+</table>
