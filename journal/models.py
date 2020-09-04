@@ -17,7 +17,7 @@ class Resource(models.Model):
     ]
     language = models.CharField(max_length=2,
         choices=LANGUAGE_CHOICES,
-        default=PYTHON)
+        blank=False)
     FLASH = 'FL'
     DJANGO = 'DJ'
     SPRINGBOOT = 'SP'
@@ -30,7 +30,7 @@ class Resource(models.Model):
     ]
     framework = models.CharField(max_length=2,
         choices=FRAMEWORK_CHOICES,
-        default=FLASH)
+        blank=True)
     # database =
     # technology =
     # pub_date = models.DateTimeField('date published')
