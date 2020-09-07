@@ -1,3 +1,7 @@
+{% extends 'journal/base.html' %}
+
+
+{% block content %}
 <table>
     <tr>
         <th>Name</th>
@@ -7,10 +11,14 @@
     </tr>
     {% for item in list_resources %}
     <tr>
-        <td>{{ item.name_text }}</td>
+        <td><a href="{% url 'journal:detail_resources' resource_id=item.id %}">{{ item.name_text }}</a></td>
         <td>{{ item.link }}</td>
         <td>{{ item.language }}</td>
         <td>{{ item.framework }}</td>
+        <td><a href="{% url 'journal:edit_resource' resource_id=item.id %}">
+            <button class="btn btn-warning">Edit</button></a></td>
+        <td><button class="btn btn-danger">Delete</button></td>
     </tr>
     {% endfor %}
 </table>
+{% endblock %}

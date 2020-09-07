@@ -31,6 +31,7 @@ class Resource(models.Model):
     framework = models.CharField(max_length=2,
         choices=FRAMEWORK_CHOICES,
         blank=True)
+    notes = models.CharField(max_length=1000, blank='True')
     # database =
     # technology =
     # pub_date = models.DateTimeField('date published')

@@ -1,6 +1,7 @@
 from django import forms
 from .models import Resource
 
+
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
@@ -8,5 +9,6 @@ class ResourceForm(forms.ModelForm):
             'name_text',
             'link',
             'language',
-            'framework'
+            'framework',
+            'notes'
         ]
