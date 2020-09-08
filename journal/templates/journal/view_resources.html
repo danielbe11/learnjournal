@@ -15,6 +15,7 @@
         <th>Language</th>
         <th>Framework</th>
         <th>Date Published</th>
+        <th>Attachment</th>
     </tr>
     <hr>
     {% for item in list_resources %}
@@ -24,6 +25,7 @@
         <td>{{ item.language }}</td>
         <td>{{ item.framework }}</td>
         <td>{{ item.post_date }}</td>
+        <td>{{ item.attachment }}</td>
         <td><a href="{% url 'journal:edit_resource' resource_id=item.id %}">
             <button class="btn btn-warning">Edit</button></a></td>
         <td><a href="{% url 'journal:delete_resource' resource_id=item.id %}">
@@ -34,3 +36,4 @@
 
 
 {% endblock %}
+

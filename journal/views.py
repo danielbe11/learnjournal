@@ -33,18 +33,54 @@ def detail_resources(request, resource_id):
     context = {'resource': resource}
     return render(request, template, context)
 
+# def create_new_resource(request):
+#     template = 'journal/create_new_resource.html'
+#     form = ResourceForm(request.POST, request.FILES)
+#
+#     if form.is_valid():
+#         form.save()
+#         messages.info(request, 'Resource was saved')
+#     else:
+#         form = ResourceForm()
+#
+#     context = {'form': form}
+#     return render(request, template, context)
+
+
+# def create_new_resource(request):
+#     template = 'journal/create_new_resource.html'
+#
+#     if request.method == "POST":
+#         form = ResourceForm(request.POST, request.FILES)
+#
+#         try:
+#             if form.is_valid():
+#                 form.save()
+#                 messages.info(request, 'Resource was saved')
+#
+#         except Exception as e:
+#             messages.info(request, 'Your post was not saved due to an error:'.format(e))
+#
+#     else:
+#         form = ResourceForm()
+#
+#     context = {'form': form}
+#
+#     return render(request, template, context)
 
 def create_new_resource(request):
     template = 'journal/create_new_resource.html'
-    form = ResourceForm(request.POST, request.FILES)
 
-    if form.is_valid():
-        form.save()
-        messages.info(request, 'Resource was saved')
+    if request.method == "POST":
+        form = ResourceForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Resource was saved')
     else:
         form = ResourceForm()
 
     context = {'form': form}
+
     return render(request, template, context)
 
 
@@ -53,7 +89,7 @@ def edit_resource(request, resource_id):
     resource = get_object_or_404(Resource, pk=resource_id)
 
     if request.method == "POST":
-        form = ResourceForm(request.POST, instance=resource)
+        form = ResourceForm(request.POST, request.FILES, instance=resource)
 
         try:
             if form.is_valid():
