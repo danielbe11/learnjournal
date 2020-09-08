@@ -20,7 +20,7 @@
     {% for item in list_resources %}
     <tr>
         <td><a href="{% url 'journal:detail_resources' resource_id=item.id %}">{{ item.name_text }}</a></td>
-        <td>{{ item.link }}</td>
+        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
         <td>{{ item.language }}</td>
         <td>{{ item.framework }}</td>
         <td>{{ item.post_date }}</td>

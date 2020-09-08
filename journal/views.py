@@ -9,7 +9,7 @@ from journal.models import Resource
 
 
 def view_resources(request):
-    query = request.GET.get("q")
+    query = request.GET.get("q") # search function
     if query:
         list_resources = Resource.objects.filter(
             Q(name_text__icontains=query) |
@@ -20,7 +20,7 @@ def view_resources(request):
                 ).distinct()
 
     else:
-        list_resources = Resource.objects.all().order_by('post_date')
+        list_resources = Resource.objects.all().order_by('-post_date') # else display all of the list...
 
     template = 'journal/view_resources.html'
     context = {'list_resources': list_resources}
@@ -36,11 +36,13 @@ def detail_resources(request, resource_id):
 
 def create_new_resource(request):
     template = 'journal/create_new_resource.html'
-    form = ResourceForm(request.POST or None)
+    form = ResourceForm(request.POST, request.FILES)
 
     if form.is_valid():
         form.save()
         messages.info(request, 'Resource was saved')
+    else:
+        form = ResourceForm()
 
     context = {'form': form}
     return render(request, template, context)
@@ -88,22 +90,4 @@ def delete_resource(request, resource_id):
 
     return render(request, template, context)
 
-
-# def get_resource_queryset(query=None): # search function
-#     template = 'journal/view_resources.html'
-#     queryset = []
-#     queries = query.split[" "]
-#     for q in queries:
-#         resources = Resource.objects.filter(
-#             Q(name_text__icontains=q) |
-#             Q(language__icontains=q) |
-#             Q(framework__icontains=q) |
-#             Q(notes__icontains=q)
-#         ).distinct()
-#
-#         for resource in resources:
-#             queryset.append(resource)
-#
-#     return list(set(queryset))
-#
 

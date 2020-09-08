@@ -1,36 +1,37 @@
 from django.db import models
 from datetime import datetime, date
 
+
 class Resource(models.Model):
     name_text = models.CharField(max_length=200)
     link = models.URLField()
-    # attachment =
-    PYTHON = 'PY'
-    RUBY = 'RU'
-    JAVA = 'JA'
-    JAVASCRIPT = 'JS'
-    LANGUAGE_CHOICES  = [
+    attachment = models.FileField(upload_to='journal/attachments/', null=True, blank=True)
+    PYTHON = 'Python'
+    RUBY = 'Ruby'
+    JAVA = 'Java'
+    JAVASCRIPT = 'JavaScript'
+    LANGUAGE_CHOICES = [
         (PYTHON, 'Python'),
         (RUBY, 'Ruby'),
         (JAVA, 'Java'),
         (JAVASCRIPT, 'JavaScript'),
     ]
-    language = models.CharField(max_length=2,
-        choices=LANGUAGE_CHOICES,
-        blank=False)
-    FLASH = 'FL'
-    DJANGO = 'DJ'
-    SPRINGBOOT = 'SP'
-    ANGULAR = 'AN'
+    language = models.CharField(max_length=30,
+                                choices=LANGUAGE_CHOICES,
+                                blank=False)
+    FLASH = 'Flash'
+    DJANGO = 'Django'
+    SPRINGBOOT = 'SpringBoot'
+    ANGULAR = 'Angular'
     FRAMEWORK_CHOICES = [
         (FLASH, 'Flash'),
         (DJANGO, 'Django'),
-        (SPRINGBOOT, 'Springboot'),
+        (SPRINGBOOT, 'SpringBoot'),
         (ANGULAR, 'Angular')
     ]
-    framework = models.CharField(max_length=2,
-        choices=FRAMEWORK_CHOICES,
-        blank=True)
+    framework = models.CharField(max_length=30,
+                                 choices=FRAMEWORK_CHOICES,
+                                 blank=True)
     notes = models.CharField(max_length=1000, blank='True')
     # database =
     # technology =

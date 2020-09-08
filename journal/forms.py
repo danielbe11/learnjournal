@@ -10,5 +10,6 @@ class ResourceForm(forms.ModelForm):
             'link',
             'language',
             'framework',
-            'notes'
+            'notes',
+            'attachment'
         ]
