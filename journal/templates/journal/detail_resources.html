@@ -1,5 +1,12 @@
 {% extends 'journal/base.html' %}
 
 {% block content %}
-<h1>Hello</h1>
+<h1> Resource: "{{ resource.name_text }}"</h1>
+<small>({{ resource.link }})</small></br>
+<hr>
+
+{{ resource.notes }}
+
+
+
 {% endblock %}

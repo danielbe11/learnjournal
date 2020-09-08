@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime, date
 
 class Resource(models.Model):
     name_text = models.CharField(max_length=200)
@@ -22,7 +22,7 @@ class Resource(models.Model):
     DJANGO = 'DJ'
     SPRINGBOOT = 'SP'
     ANGULAR = 'AN'
-    FRAMEWORK_CHOICES  = [
+    FRAMEWORK_CHOICES = [
         (FLASH, 'Flash'),
         (DJANGO, 'Django'),
         (SPRINGBOOT, 'Springboot'),
@@ -34,7 +34,8 @@ class Resource(models.Model):
     notes = models.CharField(max_length=1000, blank='True')
     # database =
     # technology =
-    # pub_date = models.DateTimeField('date published')
+    post_date = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return self.name_text
 

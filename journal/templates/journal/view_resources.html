@@ -2,23 +2,35 @@
 
 
 {% block content %}
+<br>
+<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search" value="{{ request.GET.q }}">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+
 <table>
     <tr>
         <th>Name</th>
         <th>Link</th>
         <th>Language</th>
         <th>Framework</th>
+        <th>Date Published</th>
     </tr>
+    <hr>
     {% for item in list_resources %}
     <tr>
         <td><a href="{% url 'journal:detail_resources' resource_id=item.id %}">{{ item.name_text }}</a></td>
         <td>{{ item.link }}</td>
         <td>{{ item.language }}</td>
         <td>{{ item.framework }}</td>
+        <td>{{ item.post_date }}</td>
         <td><a href="{% url 'journal:edit_resource' resource_id=item.id %}">
             <button class="btn btn-warning">Edit</button></a></td>
-        <td><button class="btn btn-danger">Delete</button></td>
+        <td><a href="{% url 'journal:delete_resource' resource_id=item.id %}">
+            <button class="btn btn-danger">Delete</button></td>
     </tr>
     {% endfor %}
 </table>
+
+
 {% endblock %}
