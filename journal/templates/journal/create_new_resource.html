@@ -1,6 +1,12 @@
 {% extends 'journal/base.html' %}
 
 {% block content %}
+{% if resource %}
+<h1>Edit Resource</h1>
+{% else %}
+<h1>Create New Resource</h1>
+{% endif %}
+
 <form method="POST", enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -14,4 +20,5 @@
     {% endfor %}
 </ul>
 {% endif %}
+
 {% endblock %}

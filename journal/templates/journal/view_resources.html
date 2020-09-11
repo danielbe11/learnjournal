@@ -8,32 +8,84 @@
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Link</th>
-        <th>Language</th>
-        <th>Framework</th>
-        <th>Date Published</th>
-        <th>Attachment</th>
-    </tr>
-    <hr>
-    {% for item in list_resources %}
-    <tr>
-        <td><a href="{% url 'journal:detail_resources' resource_id=item.id %}">{{ item.name_text }}</a></td>
-        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
-        <td>{{ item.language }}</td>
-        <td>{{ item.framework }}</td>
-        <td>{{ item.post_date }}</td>
-        <td>{{ item.attachment }}</td>
-        <td><a href="{% url 'journal:edit_resource' resource_id=item.id %}">
-            <button class="btn btn-warning">Edit</button></a></td>
-        <td><a href="{% url 'journal:delete_resource' resource_id=item.id %}">
-            <button class="btn btn-danger">Delete</button></td>
-    </tr>
-    {% endfor %}
-</table>
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 20px 0;
+      }
+      th {
+        background-color: #4287f5;
+        color: white;
+      }
+      th,
+      td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid white;
+        padding: 2px;
+      }
+      h2 {
+        color: #4287f5;
+      }
+</style>
+    {% if list_resources %}
+    <table>
+        <tr>
+            <th>Resource name</th>
+            <th>Link</th>
+            <th>Language</th>
+            <th>Framework</th>
+            <th>Date Published</th>
+            <th>Attachment</th>
+            <th>Notes?</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <hr>
 
+        {% for item in list_resources %}
+        <tr>
+            <td><a href="{% url 'journal:detail_resources' resource_id=item.id %}" target="_blank">{{ item.name_text }}</a></td>
+            <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
+            <td>
+                {% if item.language %}
+                {{ item.language }}
+                {% else %}
+                n/a
+                {% endif %}
+            </td>
+            <td>
+                {% if item.framework %}
+                {{ item.framework }}
+                {% else %}
+                n/a
+                {% endif %}
+            </td>
+            <td>{{ item.post_date }}</td>
+            <td>
+                {% if item.attachment %}
+                <a href="{{ item.attachment.url }}" target="_blank"><button class="btn btn-info">Link</button></a>
+                {% endif %}
+            </td>
+            <td><b>
+                {% if item.notes %}
+                <font color="green">Yes</font>
+                {% else %}
+                <font color="red">No</font>
+                {% endif %}</b>
+            </td>
+            <td><a href="{% url 'journal:edit_resource' resource_id=item.id %}">
+                <button class="btn btn-warning">Edit</button></a></td>
+            <td><a href="{% url 'journal:delete_resource' resource_id=item.id %}">
+                <button class="btn btn-danger">Delete</button></a></td>
+        </tr>
+        {% endfor %}
+    {% else %}
+
+
+    </table>
+    <h3>No results found</h3>
+    {% endif %}
 
 {% endblock %}
 

@@ -2,9 +2,12 @@
 
 {% block content %}
 <h1>{{ resource.name_text }}</h1>
-<small><a href="{{ resource.link }}">({{ resource.link }})</a></small></br>
+<a href="{{ resource.link }}" target="_blank">({{ resource.link }})</a></br>
 <hr>
+<u>Notes:</u></br>
+<pre>{{ resource.notes }}</pre>
 
-{{ resource.notes }}
+<a href="{% url 'journal:edit_resource' resource_id=resource.id %}"><button class="btn btn-warning">Edit</button></a>
+<a href="{% url 'journal:delete_resource' resource_id=resource.id %}"><button class="btn btn-danger">Delete</button></a>
 
 {% endblock %}
